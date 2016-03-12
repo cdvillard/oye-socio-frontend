@@ -1,7 +1,7 @@
 <service>
 	<serviceName>oyesocio</serviceName>
 	<serviceDescription>Un servicio como Facebook para cubanos hablar con otro cubanos, y lo mundo afuera.</serviceDescription>
-	<creatorEmail>oyesocio@gmail.com</creatorEmail>
+	<creatorEmail>oyesocioapp@gmail.com</creatorEmail>
 	<!--serviceCategory: negocios,ocio,academico,social,comunicaciones,informativo,adulto,otros-->
 	<serviceCategory>social</serviceCategory>
 	<serviceUsage>
