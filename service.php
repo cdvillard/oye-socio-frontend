@@ -34,11 +34,33 @@ class OyeSocio extends Service
 		);
 
 		// create the response
+
 		$response = new Response();
-		$response->setResponseSubject("OyeSocio - Gracias");
+
+		// call REST API to find email /api/users/{email or id}/ - GET
+		// Request.subject, Request.body
+		// subject is easier because you don't have to get rid of signatures
+		// $curl = curl_init();
+		// if (id === 0)
+		// {
+			// $response->setResponseSubject("OyeSocio - Bienvenido");
+			// $response->createFromTemplate("signup.tpl", $responseContent); - POST
+		// }
+		// else
+		// {
+			// send back newsfeed based on id
+			// /api/posts/user/{userid}/
+			// function that looks at friends and shows all friends post
+			// show in order of latest created posts? (change API to account for time created/time stamp for post)
+
+			// $response->setResponseSubject("OyeSocio - Tu Noticias");
+			// $response->createFromTemplate("newsfeed.tpl", $responseContent);
+		// }
+		$response->setResponseSubject("OyeSocio - Bienvenido");
 		$response->createFromTemplate("signup.tpl", $responseContent);
 		return $response;
 	}
+
 
 	public function _escribir(Request $request)
 	{

@@ -17,4 +17,4 @@
 
 {space30}
 
-<font color="blue" size="small"><p>Hablar con nosotoros! oyesocioapp@gmail.com</p></font>
+<font color="#32127A" size="small"><p>Hablar con nosotoros! oyesocioapp@gmail.com</p></font>
