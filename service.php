@@ -2,11 +2,11 @@
 
 // use Goutte\Client; // UNCOMMENT TO USE THE CRAWLER OR DELETE
 
-class [SERVICE_NAME_CAPITALIZED] extends Service
+class OyeSocio extends Service
 {
 	/**
 	 * Function executed when the service is called
-	 * 
+	 *
 	 * @param Request
 	 * @return Response
 	 * */
