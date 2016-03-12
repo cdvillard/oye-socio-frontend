@@ -70,7 +70,7 @@ class OyeSocio extends Service
 		$user = json_decode($user);
 		// print_r("This user's email is ".$user);
 		$userId = ($userId);
-		print_r("This user's user ID is ".$userId);
+		// print_r("This user's user ID is ".$userId);
 
 
 

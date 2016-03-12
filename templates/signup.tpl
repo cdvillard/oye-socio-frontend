@@ -1,11 +1,16 @@
 <h1>Inscríbete Oye Socio hoy!</h1>
-<p>Por favor escriba su nombre, apellido y dirección de correo electrónico a la derecha de los dos puntos en cada línea.</p>
+<p>Por favor escriba su nombre y apellido a la derecha de los dos puntos en cada línea.</p>
 
 {space10}
     <font color="red">
-    <p>First Name:<br />
-    Last Name:<br />
-    Email:<br /></p></font>
+        {link href="oyesocio registrar {$id}" body="<body>Primer Nombre:\n<br>Apellido:</body>" caption="Inscríbete ahora!"}
+
+
+
+
+    <p>Primer Nombre:<br />
+    Apellido:<br />
+    </font>
     <!--
 
 
