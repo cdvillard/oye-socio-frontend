@@ -1,18 +1,20 @@
-<h1>Thanks for creating a service for Apretaste</h1>
-<p>We want to say thank you, and we hope you find that using our API is fun and easy.</p>
+<h1>Inscríbete Oye Socio hoy!</h1>
+<p>Por favor escriba su nombre, apellido y dirección de correo electrónico a la derecha de los dos puntos en cada línea.</p>
 
 {space10}
+    <font color="red">
+    <p>First Name:<br />
+    Last Name:<br />
+    Email:<br /></p></font>
+    <!--
 
-<p>{$var_one|capitalize} {$var_two} {$var_three}</p>
+
+    {$var_one|capitalize} {$var_two} {$var_three}</p> -->
 
 {space15}
 
-<center>
-	<p><small>You can use all the power of HTML and Smarty to generate this template.</small></p>
-	{button href="AYUDA" caption="La ayuda de Apretaste"}
-	{space15}
-</center>
+
 
 {space30}
 
-<p>If you have any questions, please email me at salvi.pascual@gmail.com</p>
+<font color="blue" size="small"><p>Hablar con nosotoros! oyesocioapp@gmail.com</p></font>

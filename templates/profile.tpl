@@ -1,17 +1,21 @@
 <h1>Thanks for creating a service for Apretaste</h1>
 <p>We want to say thank you, and we hope you find that using our API is fun and easy.</p>
 
-{space10}
+<h2>Amigos</h2>
+<ul>
+{foreach $friends as $friend}
+    <li>{$friend}</li>
+{/foreach}
+</ul>
 
-<p>{$var_one|capitalize} {$var_two} {$var_three}</p>
+<h2>Mensajes</h2>
+<ul>
+{foreach $posts as $post}
+    <li>{$post}</li>
+{/foreach}
+</ul>
 
-{space15}
 
-<center>
-	<p><small>You can use all the power of HTML and Smarty to generate this template.</small></p>
-	{button href="AYUDA" caption="La ayuda de Apretaste"}
-	{space15}
-</center>
 
 {space30}
 
