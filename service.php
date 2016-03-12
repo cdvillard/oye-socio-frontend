@@ -54,4 +54,19 @@ class OyeSocio extends Service
 		$response->createFromTemplate("basic.tpl", $responseContent);
 		return $response;
 	}
+
+	public function _escribir(Request $request)
+	{
+		$responseContent = array(
+			"var_one" => "salvi",
+			"var_two" => "el mio",
+			"var_three" => 45
+		);
+
+		// create the response
+		$response = new Response();
+		$response->setResponseSubject("[RESPONSE_EMAIL_SUBJECT]");
+		$response->createFromTemplate("basic.tpl", $responseContent);
+		return $response;
+	}
 }
