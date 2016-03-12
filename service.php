@@ -25,7 +25,8 @@ class OyeSocio extends Service
 		$user = json_decode($user);
 		$userId = ($user->id);
 
-		// print_r("This user's user ID is ".$user;Id);
+		// print_r("This user's user ID is ".$userId);
+		// exit;
 		if ($userId === 0) {
 			$response->setResponseSubject("Necesitamos saber su nombre");
 			$response->createFromTemplate("signup.tpl", array());
@@ -38,6 +39,7 @@ class OyeSocio extends Service
 
 	public function _registrarse(Request $request)
 	{
+		$email = $request->email;
 		// get the name
 		$fullname = explode(" ", $request->query);
 		$firstName = $fullname[0];
