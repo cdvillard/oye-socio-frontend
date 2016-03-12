@@ -61,4 +61,64 @@ class OyeSocio extends Service
 		$response->createFromText("El resgisto se ha realizado satisfactoriamente.");
 		return $response;
 	}
+
+	public function _perfil(Request $request)
+	{
+		$email = $request->email;
+
+		// $user = file_get_contents("http://45.79.199.31:2016/OyeSocio/api/users/{$email}/");
+		$user = file_get_contents("http://45.79.199.31:2016/OyeSocio/api/users/1/");
+		$user = json_decode($user);
+		$userId = ($user->id);
+
+		$firstName = ($user->firstName);
+		$lastName = ($user->lastName);
+
+		$posts = file_get_contents("http://45.79.199.31:2016/OyeSocio/api/posts/user/1/");
+		// $posts = file_get_contents("http://45.79.199.31:2016/OyeSocio/api/posts/user/{$email}/");
+		$posts = json_decode($posts);
+
+
+		$orderedArray = array();
+		// print_r($firstName);
+		// exit;
+		foreach ($posts as $post) {
+		//    $postId = ($post->id);
+			array_unshift($orderedArray, $post);
+
+		}
+
+
+
+		// associative array
+		$profileInfo = [];
+		$profileInfo["firstName"] = $firstName;
+		$profileInfo["lastName"] = $lastName;
+		$profileInfo["posts"] = $orderedArray;
+
+
+
+		//oldest comments first
+
+		$postCommentArray = [];
+
+		//foreach loop
+		foreach ($posts as $post) {
+			$postComments = file_get_contents("http://45.79.199.31:2016/OyeSocio/api/comments/post/"."{$post->id}");
+			// $posts = file_get_contents("http://45.79.199.31:2016/OyeSocio/api/comments/post/{$postId}/");
+			$postComments = json_decode($postComments);
+			$postCommentArray[$post] = $postComments;
+		}
+		$profileInfo["postCommmentMap"] = $postCommentArray;
+
+		foreach($postCommentMap as $post => $comment) {
+  			echo $comment.' is begin with ('.$post.')';
+		}
+
+	//	create the response
+		$response = new Response();
+		$response->setResponseSubject("Perfil!");
+		$response->createFromTemplate("profile.tpl", $profileInfo);
+		return $response;
+	}
 }
