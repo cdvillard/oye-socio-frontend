@@ -1,0 +1,27 @@
+PHP post requests
+
+Signup:
+/api/users
+POST request contains firstName, lastName, email
+- Adds to database
+- You receieve a user ID
+(if it doesn't work, user id will = 0)
+
+Getting profile
+Or people who are already signed up and need to find their IDs
+/api/users/{email address or user id}/
+GET request
+With email requests, it requires an ending slash
+
+Build up profile:
+Friends - array of IDs
+Posts - array of IDs
+/api/posts POST request (userId, content)
+/api/posts/{id}/
+foreach
+/api/posts/user/{userId}/ - for all posts from a user (GET requests)
+contains array of comments
+/api/comments/post/{postId}/ - GET requests for all comments on a post
+save post ID and iterate them to get comments for all post
+
+/api/comments/{id} - GET requests for individual comment

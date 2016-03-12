@@ -25,3 +25,10 @@ image width and other image tags, foreach loops, etc.
 
 Compress all files in the service's folder in a zip file, with the files in the zip file root
 upload to apretaste.com/manage to deploy a service
+
+
+
+{link href="oyesocio registrar {$id}" body="Primer Nombre:\nApellido:" caption="Inscríbete ahora!"}
+
+
+// {$id can be any variable you're passing}

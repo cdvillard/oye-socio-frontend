@@ -1,0 +1,76 @@
+<?php
+
+// use Goutte\Client; // UNCOMMENT TO USE THE CRAWLER OR DELETE
+
+class OyeSocio extends Service
+{
+	/**
+	 * Function executed when the service is called
+	 *
+	 * @param Request
+	 * @return Response
+	 * */
+	public function _main(Request $request)
+	{
+		/* UNCOMMENT TO USE THE CRAWLER OR DELETE
+		// create a new client
+		$client = new Client();
+		$guzzle = $client->getClient();
+		$guzzle->setDefaultOption('verify', false);
+		$client->setClient($guzzle);
+
+		// create a crawler
+		$crawler = $client->request('GET', "https://google.com");
+
+		// search for result
+		$result = $crawler->filter('.health-topic-boost-wrapper')->text();
+		*/
+
+		// create a json object to send to the template
+		$responseContent = array(
+			"var_one" => "hello",
+			"var_two" => "world",
+			"var_three" => 23
+		);
+
+		//$request =  'http://search.yahooapis.com/ImageSearchService/V1/imageSearch?appid=YahooDemo&query='.urlencode('Al Gore').'&results=8';
+        //$session = curl_init($request);
+
+		// create the response
+		$response = new Response();
+		$response->setResponseSubject("OyeSocio - Gracias");
+		$response->createFromTemplate("signup.tpl", $responseContent);
+		return $response;
+
+		public function _profile(Request $request)
+		{
+
+			$responseContent = array(
+			"user" => $user,
+			"firstName" => $firstName,
+			"lastName" => $lastName,
+			"email" => $email,
+			"friends" => $friends,
+			"posts" => $posts
+			);
+
+			$response = new Response();
+			$response->setResponseSubject("OyeSocio - Gracias");
+			$response->createFromTemplate("profile.tpl", $responseContent);
+			return $response;
+		}
+		public function _search(Request $request)
+		{
+
+		}
+		public function _friendrequest(Request $request)
+		{
+
+		}
+		public function _newsfeed(Request $request)
+		{
+
+		}
+
+	}
+}
