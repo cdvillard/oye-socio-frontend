@@ -104,7 +104,7 @@ class OyeSocio extends Service
 
 			$response->setResponseSubject("OyeSocio - Tu Noticias");
 			$response->createFromTemplate("newsfeed.tpl", $responseContent);
-		// }
+		}
 		$response->setResponseSubject("OyeSocio - Bienvenido");
 		$response->createFromTemplate("signup.tpl", $responseContent);
 		return $response;
