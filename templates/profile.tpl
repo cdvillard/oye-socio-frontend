@@ -29,7 +29,7 @@
 <table border="1" style="width:100%; background-color: yellow; border: solid black 1px;">
 {foreach $posts as $post}
     <tr><td>
-    <b>{$post->content}{space10}</b>
+    <b>{$post->content}</b> {link href="oyesocio respuesta TU MENSAJE" body="Por favor remplace TU MENSAJE con lo que quiere decir en su respuesta" caption="Respuesta"}{space10}
     {foreach $comments[$post@index] as $comment}
         {$comment->content}</br></br>
     {/foreach}
