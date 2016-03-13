@@ -280,7 +280,7 @@ class OyeSocio extends Service
 
 		//	create the response
 			$response = new Response();
-			$response->setResponseSubject("Newsfeed");
+			$response->setResponseSubject("Últimos mensajes de tus amigos");
 			$response->createFromTemplate("newsfeed.tpl", $assocArray);
 			return $response;
 	}

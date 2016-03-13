@@ -4,7 +4,7 @@
 <b>{$firstName} {$lastName}</b>{space30}
 </h2>
 
-<center><h3>Mensajes</h3>
+<center><h3>Tu Mensajes</h3>
 {*
 
     <!-- <tr><td> -->

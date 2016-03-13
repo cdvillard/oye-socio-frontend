@@ -1,5 +1,5 @@
 <h1>Newsfeed</h1>
-<p>Latest Posts from your friends</p>
+<p>Últimos mensajes de tus amigos</p>
 
 {space10}
 
