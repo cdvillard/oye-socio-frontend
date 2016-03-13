@@ -1,12 +1,25 @@
-{*
-<!-- <h2>Amigos</h2>
-<ul>
-{foreach $friends as $friend}
-    <li>{$friend}</li>
-{/foreach}
-</ul>
-</ul> -->
-*}
+
+
+<table border="1" width="100%">
+    {foreach from=$posts item=post}
+    <tr>
+        <td>
+            <p>{$firstName} {$lastName}<br/>{$post->content}</p>
+            <table border="1"  width="100%">
+                {foreach from=$post->comments item=comment}
+                <tr>
+                    <td width="10"></td>
+                    <td><p>{$comment->content}<br/>{$comment->author}</p></td>
+                </tr>
+                {/foreach}
+            </table>
+
+        </td>
+    </tr>
+    {/foreach}
+</table>
+
+
 
 <font size="30px">Oye Socio! ⇝ Perfil</font>{space30}
 
@@ -32,43 +45,33 @@
     <p style="float:right; font-size:1.5em">Jose Marti</p>
     <div style="width:5em; height:5em; background:gray; margin-bottom:1em;"></div>
     {foreach $posts as $post}
+        <div style="padding:1em; padding-bottom:0.5em; border:5px;">
 
-    <div style="padding:1em; padding-bottom:0.5em; border:5px;">
-
-    <b>{$post->content}</b>
-    <hr style="margin-top:1em; border: solid 1px; border-color:#c9c9c9; color:#c9c9c9: background-color:#c9c9c9;">
-    <div style="padding-bottom:0.5em; text-align:right">
-        <a href="#" style="text-decoration:none">
-            <p style="padding-right:1em; display:inline; color:green; font-size:1.2em;">+1</p>
-        </a>
-        <p style="padding-right:1em; display:inline; font-size: 1.2em; test-decoration:none;">{link href="oyesocio respuesta {$post->id} TU MENSAJE" body="Por favor remplace TU MENSAJE con lo que quiere decir en su respuesta" caption="Respuesta"}{space10}</p>
-        </a>
-    </div>
-    </div>
-</div>
-<div style="background: #f4f4f4; padding:1em; margin-left:2em; margin-top:0.5em; border-radius: 0.6em; border-left: solid darkgray; font-family:Arial; font-size:0.9em">
-
-        {foreach $comments[$post@index] as $comment}
-        <p style="float:right; font-size:1.2em">Carla Pichilon</p>
-        <div style="width:3em; height:3em; background:gray; margin-bottom:1em;"></div>
-        {$comment->content}
-        <hr style="margin-top:1em; border: solid 1px; border-color:#c9c9c9; color:#c9c9c9: background-color:#c9c9c9">
+        <b>{$post->content}</b>
+        <hr style="margin-top:1em; border: solid 1px; border-color:#c9c9c9; color:#c9c9c9: background-color:#c9c9c9;">
         <div style="padding-bottom:0.5em; text-align:right">
             <a href="#" style="text-decoration:none">
-                <p style="padding-right:1em; display:inline; color:green; font-size:1.2em">+1</p>
+                <p style="padding-right:1em; display:inline; color:green; font-size:1.2em;">+1</p>
+            </a>
+            <p style="padding-right:1em; display:inline; font-size: 1.2em; test-decoration:none;">{link href="oyesocio respuesta {$post->id} TU MENSAJE" body="Por favor remplace TU MENSAJE con lo que quiere decir en su respuesta" caption="Respuesta"}{space10}</p>
             </a>
         </div>
+        </div>
+    </div>
+    <div style="background: #f4f4f4; padding:1em; margin-left:2em; margin-top:0.5em; border-radius: 0.6em; border-left: solid darkgray; font-family:Arial; font-size:0.9em">
 
-    {/foreach}
-</div>
+            {foreach $comments[$post@index] as $comment}
+            <p style="float:right; font-size:1.2em">Carla Pichilon</p>
+            <div style="width:3em; height:3em; background:gray; margin-bottom:1em;"></div>
+            {$comment->content}
+            <hr style="margin-top:1em; border: solid 1px; border-color:#c9c9c9; color:#c9c9c9: background-color:#c9c9c9">
+            <div style="padding-bottom:0.5em; text-align:right">
+                <a href="#" style="text-decoration:none">
+                    <p style="padding-right:1em; display:inline; color:green; font-size:1.2em">+1</p>
+                </a>
+            </div>
 
-
-
-{/foreach}
-
-
-
-
-
-
+        {/foreach}
+    </div>
+  {/foreach}
 {space30}

@@ -168,72 +168,42 @@ class OyeSocio extends Service
 		$email = $request->email;
 
 		$user = file_get_contents("http://45.79.199.31:2016/OyeSocio/api/users/{$email}/");
-		// $user = file_get_contents("http://45.79.199.31:2016/OyeSocio/api/users/1/");
 		$user = json_decode($user);
-		$userId = ($user->id);
+		$userId = $user->id;
 
-		$firstName = ($user->firstName);
-		$lastName = ($user->lastName);
+		// get full user name
+		$firstName = $user->firstName;
+		$lastName = $user->lastName;
 
-		// $posts = file_get_contents("http://45.79.199.31:2016/OyeSocio/api/posts/user/1/");
+		// get the post
 		$posts = file_get_contents("http://45.79.199.31:2016/OyeSocio/api/posts/user/{$userId}/");
 		$posts = json_decode($posts);
 
-
-		$orderedArray = array();
-		// print_r($firstName);
-		// exit;
-		foreach ($posts as $post) {
-		//    $postId = ($post->id);
-			array_unshift($orderedArray, $post);
-
-		}
-
-		//oldest comments first
-
-		//foreach loop
-		$postCommentArray = [];
-		$commentList = [];
-		$postComments = array();
-
-		foreach ($posts as $post) {
+		// get the comments for each post
+		for($i=0; $i<count($posts); $i++)
+		{
+			$post = $posts[$i];
 			$postComments = file_get_contents("http://45.79.199.31:2016/OyeSocio/api/comments/post/{$post->id}");
-			// $posts = file_get_contents("http://45.79.199.31:2016/OyeSocio/api/comments/post/1/");
 			$postComments = json_decode($postComments);
-			//foreach comment in $postComments
-			$postCommentArray[$post->id] = array($post, $postComments);
-			// append comment to commentArray
-			array_unshift($commentList, $postComments);
-			// print_r($postCommentArray[$post->id]);
-		}
-		// echo ($commentList);
-		// exit;
 
-		//Add names of comment authors to comment objects
-		foreach ($commentList as $commentArray) {
-			//Double foreach loops because each post as an array of comments)
-			foreach($commentArray as $comment) {
+			// get user names for each comment
+			for($j=0; $j<count($postComments); $j++)
+			{
+				$comment = $postComments[$j];
 				$commentAuthorData = json_decode(file_get_contents("http://45.79.199.31:2016/OyeSocio/api/users/{$comment->userId}"));
-				$comment->author = $commentAuthorData->firstName." ".$commentAuthorData->lastName;
-				// print_r($comment);
+				$postComments[$j]->author = $commentAuthorData->firstName." ".$commentAuthorData->lastName;
 			}
-			//Result in this scope available as $commentArray
-			//array_push($postComments, $commentArray);
+			$posts[$i]->comments = $postComments;
 		}
-		// print_r($postComments);
-		// exit;
-		//Result in this scope available as $commentList
 
-
+		// create the response array
 		$profileInfo = array(
 			"firstName" => $firstName,
 			"lastName" => $lastName,
-			"posts" => $orderedArray,
-			"postCommentMap" => $postCommentArray,
-			"comments" => $postComments
+			"posts" => $posts
 		);
 
-	//	create the response
+		//	create the response
 		$response = new Response();
 		$response->setResponseSubject("Perfil!");
 		$response->createFromTemplate("profile.tpl", $profileInfo);
@@ -242,8 +212,6 @@ class OyeSocio extends Service
 
 	public function _newsfeed(Request $request)
 	{
-
-
 		//USE THE FOLLOWING $email VARIABLE FOR LIVE PRODUCTION - Charles
 		//$email = $request->email;
 		//THIS $email VARIABLE IS EXACTLTY WHAT IT STATES: FOR TESTING - Charles
