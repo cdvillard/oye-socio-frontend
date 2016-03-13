@@ -88,32 +88,30 @@ class OyeSocio extends Service
 
 		}
 
-
-
-		// associative array
-		$profileInfo = [];
-		$profileInfo["firstName"] = $firstName;
-		$profileInfo["lastName"] = $lastName;
-		$profileInfo["posts"] = $orderedArray;
-
-
-
 		//oldest comments first
 
-		$postCommentArray = [];
-
 		//foreach loop
-		foreach ($posts as $post) {
-			$postComments = file_get_contents("http://45.79.199.31:2016/OyeSocio/api/comments/post/"."{$post->id}");
-			// $posts = file_get_contents("http://45.79.199.31:2016/OyeSocio/api/comments/post/{$postId}/");
-			$postComments = json_decode($postComments);
-			$postCommentArray[$post] = $postComments;
-		}
-		$profileInfo["postCommmentMap"] = $postCommentArray;
+		$postCommentArray = [];
+		$commentArray = [];
 
-		foreach($postCommentMap as $post => $comment) {
-  			echo $comment.' is begin with ('.$post.')';
+		foreach ($posts as $post) {
+			$postComments = file_get_contents("http://45.79.199.31:2016/OyeSocio/api/comments/post/{$post->id}");
+			// $posts = file_get_contents("http://45.79.199.31:2016/OyeSocio/api/comments/post/1/");
+			$postComments = json_decode($postComments);
+			// $postCommentArray[$post->id] = array($post, $postComments);
+			// append comment to commentArray
+			array_unshift($commentArray, $postComments);
+			// print_r($postCommentArray[$post->id]);
 		}
+
+
+		$profileInfo = array(
+			"firstName" => $firstName,
+			"lastName" => $lastName,
+			"posts" => $orderedArray,
+			"postCommentMap" => $postCommentArray,
+			"comments" => $commentArray
+		);
 
 	//	create the response
 		$response = new Response();
