@@ -5,7 +5,7 @@
 
 {foreach from=$newsFeed item=post}
 <div>
-	{$post->userId}<br />
+	{$post->userId}: {$post->person}<br />
 	{$post->content}
 	{foreach from=$post->comments item=comment}
 	<p>{$comment}</p>
