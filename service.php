@@ -124,21 +124,46 @@ class OyeSocio extends Service
 
 	public function _newsfeed(Request $request)
 	{
-		$friends = file_get_contents("http://45.79.199.31:2016/OyeSocio/api/friends/user/1/");
+
+
+		//USE THE FOLLOWING $email VARIABLE FOR LIVE PRODUCTION - Charles
+		//$email = $request->email;
+		//THIS $email VARIABLE IS EXACTLTY WHAT IT STATES: FOR TESTING - Charles
+		$email = "test@test.com";
+
+		$user = json_decode(file_get_contents("http://45.79.199.31:2016/OyeSocio/api/users/".$email."/"));
+
+		$userId= $user->id;
+
+		$friends = file_get_contents("http://45.79.199.31:2016/OyeSocio/api/friends/user/".$userId."/");
 		$friends = json_decode($friends);
+
 		$newsFeed = array();
+
 		foreach ($friends as $friend) {
 			$posts = file_get_contents("http://45.79.199.31:2016/OyeSocio/api/posts/user/".$friend->friendId."/");
-			array_push($newsFeed, json_decode($posts)[0]);
+			$postAuthorData = json_decode(file_get_contents("http://45.79.199.31:2016/OyeSocio/api/users/".$friend->friendId));
+			$post = json_decode($posts)[0];
+			$post->person = $postAuthorData->firstName." ".$postAuthorData->lastName;
+			array_push($newsFeed, $post);
 		}
 		// print_r($newsFeed);
 		// exit;
+		$postAuthors = array();
+
+		foreach ($newsFeed as $post) {
+			$postAuthorData = json_decode(file_get_contents("http://45.79.199.31:2016/OyeSocio/api/users/".$post->userId));
+			$postAuthorName = $postAuthorData->firstName." ".$postAuthorData->lastName;
+			array_push($postAuthors, $postAuthorName);
+		}
+
 		usort($newsFeed, function($a, $b) {
 			return $b->id - $a->id;
 		});
 		// print_r($newsFeed);
 		// exit;
 		$assocArray["newsFeed"] = $newsFeed;
+
 		//	create the response
 			$response = new Response();
 			$response->setResponseSubject("Newsfeed");
