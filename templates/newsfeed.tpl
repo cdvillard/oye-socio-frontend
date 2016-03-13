@@ -1,9 +1,18 @@
-<h1>Thanks for creating a service for Apretaste</h1>
-<p>We want to say thank you, and we hope you find that using our API is fun and easy.</p>
+<h1>Newsfeed</h1>
+<p>Latest Posts from your friends</p>
 
 {space10}
 
-<p>{$var_one|capitalize} {$var_two} {$var_three}</p>
+{foreach from=$newsFeed item=post}
+<div>
+	{$post->userId}<br />
+	{$post->content}
+	{foreach from=$post->comments item=comment}
+	<p>{$comment}</p>
+	{/foreach}
+</div>
+{space10}
+{/foreach}
 
 {space15}
 
