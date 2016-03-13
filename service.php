@@ -30,7 +30,7 @@ class OyeSocio extends Service
 		if ($userId === 0) {
 			$response->setResponseSubject("Necesitamos saber su nombre");
 			$response->createFromTemplate("signup.tpl", array());
-		} else {
+
 	//		$this->sendNewsFeed();
 		// show news feed to existing users
 		}
