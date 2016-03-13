@@ -165,7 +165,8 @@ class OyeSocio extends Service
 
 	public function _perfil(Request $request)
 	{
-		$email = "test@test.com";//$request->email;
+		$email = $request->email;
+		// $email = "test@test.com";
 
 		$user = file_get_contents("http://45.79.199.31:2016/OyeSocio/api/users/{$email}/");
 		// $user = file_get_contents("http://45.79.199.31:2016/OyeSocio/api/users/1/");
@@ -174,7 +175,7 @@ class OyeSocio extends Service
 
 		$firstName = ($user->firstName);
 		$lastName = ($user->lastName);
-		
+
 		// $posts = file_get_contents("http://45.79.199.31:2016/OyeSocio/api/posts/user/1/");
 		$posts = file_get_contents("http://45.79.199.31:2016/OyeSocio/api/posts/user/{$userId}/");
 		$posts = json_decode($posts);
@@ -217,7 +218,7 @@ class OyeSocio extends Service
 				$comment->author = $commentAuthorData->firstName." ".$commentAuthorData->lastName;
 			}
 			//Result in this scope available as $commentArray
-			//print_r($commentArray);
+			//print_r($commentArray); $commentList->
 		}
 		//Result in this scope available as $commentList
 
