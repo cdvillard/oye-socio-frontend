@@ -1,4 +1,4 @@
-<h1>Inscríbete Oye Socio hoy!</h1>
+<font size="30px">Inscríbete Oye Socio hoy! ★☆★ </font>
 <p>Por favor escriba su nombre y apellido a la derecha de los dos puntos en cada línea.</p>
 
 {space10}

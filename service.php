@@ -167,6 +167,9 @@ class OyeSocio extends Service
 	{
 		$email = $request->email;
 
+		// $email = "test@test.com";
+
+
 		$user = file_get_contents("http://45.79.199.31:2016/OyeSocio/api/users/{$email}/");
 		$user = json_decode($user);
 		$userId = $user->id;
@@ -193,14 +196,18 @@ class OyeSocio extends Service
 				$commentAuthorData = json_decode(file_get_contents("http://45.79.199.31:2016/OyeSocio/api/users/{$comment->userId}"));
 				$postComments[$j]->author = $commentAuthorData->firstName." ".$commentAuthorData->lastName;
 			}
+
 			$posts[$i]->comments = $postComments;
+
 		}
 
 		// create the response array
 		$profileInfo = array(
 			"firstName" => $firstName,
 			"lastName" => $lastName,
+
 			"posts" => $posts
+
 		);
 
 		//	create the response
