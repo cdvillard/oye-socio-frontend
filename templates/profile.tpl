@@ -20,8 +20,6 @@
 </center>
 
 
-
-
     {foreach from=$posts item=post}
     <!-- post order appearance needs to be reversed  -->
     <div style="background:#f3f8fa; padding:1em; padding-bottom:0.5em; border-radius: 0.6em; border-left:thick solid #4ea0cb; font-family:Arial; font-size:0.9em;">
