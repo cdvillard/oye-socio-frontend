@@ -202,7 +202,7 @@ class OyeSocio extends Service
 			// $posts = file_get_contents("http://45.79.199.31:2016/OyeSocio/api/comments/post/1/");
 			$postComments = json_decode($postComments);
 			//foreach comment in $postComments
-			// $postCommentArray[$post->id] = array($post, $postComments);
+			$postCommentArray[$post->id] = array($post, $postComments);
 			// append comment to commentArray
 			array_unshift($commentList, $postComments);
 			// print_r($postCommentArray[$post->id]);
