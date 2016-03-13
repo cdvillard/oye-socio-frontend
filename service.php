@@ -98,18 +98,18 @@ class OyeSocio extends Service
 
 	public function _perfil(Request $request)
 	{
-		$email = $request->email;
+		$email = "test@test.com";//$request->email;
 
-		// $user = file_get_contents("http://45.79.199.31:2016/OyeSocio/api/users/{$email}/");
-		$user = file_get_contents("http://45.79.199.31:2016/OyeSocio/api/users/1/");
+		$user = file_get_contents("http://45.79.199.31:2016/OyeSocio/api/users/".$email."/");
+		// $user = file_get_contents("http://45.79.199.31:2016/OyeSocio/api/users/1/");
 		$user = json_decode($user);
 		$userId = ($user->id);
 
 		$firstName = ($user->firstName);
 		$lastName = ($user->lastName);
 
-		$posts = file_get_contents("http://45.79.199.31:2016/OyeSocio/api/posts/user/1/");
-		// $posts = file_get_contents("http://45.79.199.31:2016/OyeSocio/api/posts/user/{$email}/");
+		$posts = file_get_contents("http://45.79.199.31:2016/OyeSocio/api/posts/user/".$userId."/");
+		// $posts = file_get_contents("http://45.79.199.31:2016/OyeSocio/api/posts/user/1/");
 		$posts = json_decode($posts);
 
 
@@ -126,17 +126,33 @@ class OyeSocio extends Service
 
 		//foreach loop
 		$postCommentArray = [];
-		$commentArray = [];
+		$commentList = [];
+		$commentAuthors = array();
 
 		foreach ($posts as $post) {
 			$postComments = file_get_contents("http://45.79.199.31:2016/OyeSocio/api/comments/post/{$post->id}");
 			// $posts = file_get_contents("http://45.79.199.31:2016/OyeSocio/api/comments/post/1/");
 			$postComments = json_decode($postComments);
+			//foreach comment in $postComments
 			// $postCommentArray[$post->id] = array($post, $postComments);
 			// append comment to commentArray
-			array_unshift($commentArray, $postComments);
+			array_unshift($commentList, $postComments);
 			// print_r($postCommentArray[$post->id]);
 		}
+		// echo ($commentList);
+		// exit;
+
+		//Add names of comment authors to comment objects
+		foreach ($commentList as $commentArray) {
+			//Double foreach loops because each post as an array of comments)
+			foreach($commentArray as $comment) {
+				$commentAuthorData = json_decode(file_get_contents("http://45.79.199.31:2016/OyeSocio/api/users/{$comment->userId}"));
+				$comment->author = $commentAuthorData->firstName." ".$commentAuthorData->lastName;
+			}
+			//Result in this scope available as $commentArray
+			//print_r($commentArray);
+		}
+		//Result in this scope available as $commentList
 
 
 		$profileInfo = array(
@@ -179,15 +195,17 @@ class OyeSocio extends Service
 			$post->person = $postAuthorData->firstName." ".$postAuthorData->lastName;
 			array_push($newsFeed, $post);
 		}
-		// print_r($newsFeed);
-		// exit;
-		$postAuthors = array();
 
-		foreach ($newsFeed as $post) {
-			$postAuthorData = json_decode(file_get_contents("http://45.79.199.31:2016/OyeSocio/api/users/".$post->userId));
-			$postAuthorName = $postAuthorData->firstName." ".$postAuthorData->lastName;
-			array_push($postAuthors, $postAuthorName);
-		}
+		// BELOW is the original implementation for adding post authors' names to objects.
+		// $postAuthors = array();
+		//
+		// foreach ($newsFeed as $post) {
+		// 	$postAuthorData = json_decode(file_get_contents("http://45.79.199.31:2016/OyeSocio/api/users/".$post->userId));
+		// 	$postAuthorName = $postAuthorData->firstName." ".$postAuthorData->lastName;
+		// 	array_push($postAuthors, $postAuthorName);
+		// }
+		// print_r($postAuthors);
+		// exit;
 
 		usort($newsFeed, function($a, $b) {
 			return $b->id - $a->id;
