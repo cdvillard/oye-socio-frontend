@@ -121,4 +121,28 @@ class OyeSocio extends Service
 		$response->createFromTemplate("profile.tpl", $profileInfo);
 		return $response;
 	}
+
+	public function _newsfeed(Request $request)
+	{
+		$friends = file_get_contents("http://45.79.199.31:2016/OyeSocio/api/friends/user/1/");
+		$friends = json_decode($friends);
+		$liveFeed = array();
+		foreach ($friends as $friend) {
+			$posts = file_get_contents("http://45.79.199.31:2016/OyeSocio/api/posts/user/".$friend->friendId."/");
+			array_push($liveFeed, $posts);
+		}
+		usort($liveFeed, function($a, $b) {
+			if ($a == $b) {
+				return 0;
+			}
+			return ($a < $b) ? 1 : -1;
+		});
+
+
+		//	create the response
+			$response = new Response();
+			$response->setResponseSubject("Perfil!");
+			$response->createFromTemplate("profile.tpl", $profileInfo);
+			return $response;
+	}
 }
