@@ -26,21 +26,19 @@
 <!-- </td></tr> -->
 *}
 
-
+<table border="1" style="width:100%; background-color: yellow; border: solid black 1px;">
 {foreach $posts as $post}
-<div style="background:#bad7ff; padding:1em; padding-bottom:0.5em; border:5px;">
-
-    <b>{$post->content}</b>
-        <p style="text-align:right; padding-right:1em;">{link href="oyesocio respuesta {$post->id} TU MENSAJE" body="Por favor remplace TU MENSAJE con lo que quiere decir en su respuesta" caption="Respuesta"}{space10}</p>
-    </div>
-        {foreach $comments[$post@index] as $comment}
-        <div style="background:#D9E9FF; padding:1em; margin-left:1em; border:1px;">{$comment->content}</div>
+    <tr><td>
+    <b>{$post->content}</b> {link href="oyesocio respuesta {$post->id} TU MENSAJE" body="Por favor remplace TU MENSAJE con lo que quiere decir en su respuesta" caption="Respuesta"}{space10}
+    {foreach $comments[$post@index] as $comment}
+        {$comment->content}</br></br>
     {/foreach}
-
+    </tr></td>
 {/foreach}
 
 
 
+</table>
 
 
 

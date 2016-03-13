@@ -69,6 +69,16 @@ class OyeSocio extends Service
 		$postId = $query[0];
 		unset($query[0]);
 		$content = implode(" ", $query);
+		// need fix for content with accents - replace accented chars
+		$content = str_replace("á", "a", $content);
+		$content = str_replace("é", "e", $content);
+		$content = str_replace("í", "i", $content);
+		$content = str_replace("ó", "o", $content);
+		$content = str_replace("ú", "u", $content);
+		$content = str_replace("ñ", "n", $content);
+		$content = str_replace("ü", "u", $content);
+		$content = str_replace("¡", "!", $content);
+		$content = str_replace("¿", "?", $content);
 		// die("$postId - $content");
 		// exit;
 		$email = $request->email;
@@ -144,7 +154,7 @@ class OyeSocio extends Service
 			"lastName" => $lastName,
 			"posts" => $orderedArray,
 			"postCommentMap" => $postCommentArray,
-			"comments" => $commentArray
+			"comments" => $commentArray,
 		);
 
 	//	create the response
