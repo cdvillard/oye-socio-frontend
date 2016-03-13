@@ -32,6 +32,7 @@ class OyeSocio extends Service
 			$response->createFromTemplate("signup.tpl", array());
 		} else {
 	//		$this->sendNewsFeed();
+		// show news feed to existing users
 		}
 
 		return $response;
@@ -60,6 +61,39 @@ class OyeSocio extends Service
 		$response->setResponseSubject("Gracias para registrarse!");
 		$response->createFromText("El resgisto se ha realizado satisfactoriamente.");
 		return $response;
+	}
+
+	public function _respuesta(Request $request)
+	{
+		$query = explode(" ", $request->query);
+		$postId = $query[0];
+		unset($query[0]);
+		$content = implode(" ", $query);
+		// die("$postId - $content");
+		// exit;
+		$email = $request->email;
+
+		$user = file_get_contents("http://45.79.199.31:2016/OyeSocio/api/users/{$email}/");
+		$user = json_decode($user);
+		$userId = ($user->id);
+
+		// save using the API
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL,"http://45.79.199.31:2016/OyeSocio/api/comments"); // which URL you'll go to
+		curl_setopt($ch, CURLOPT_POST, 1);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, "userId={$userId}&postId={$postId}&content={$content}"); // parameters that will append to url
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		$server_output = curl_exec ($ch);
+		curl_close ($ch);
+		// print_r($server_output);
+
+		// create the response
+		$response = new Response();
+		$response->setResponseSubject("Su respuesta fue publicada!");
+		$response->createFromText("Tu comentario ha sido publicado correctamente.");
+		return $response;
+
+
 	}
 
 	public function _perfil(Request $request)

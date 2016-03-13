@@ -8,6 +8,8 @@
 </ul> -->
 *}
 
+<font size="30px">Oye Socio! ⇝ Perfil</font>{space30}
+
 <font color="red">
 <b>{$firstName} {$lastName}</b>{space30}
 </font>
@@ -24,12 +26,10 @@
 <!-- </td></tr> -->
 *}
 
-
-
 <table border="1" style="width:100%; background-color: yellow; border: solid black 1px;">
 {foreach $posts as $post}
     <tr><td>
-    <b>{$post->content}</b> {link href="oyesocio respuesta TU MENSAJE" body="Por favor remplace TU MENSAJE con lo que quiere decir en su respuesta" caption="Respuesta"}{space10}
+    <b>{$post->content}</b> {link href="oyesocio respuesta {$post->id} TU MENSAJE" body="Por favor remplace TU MENSAJE con lo que quiere decir en su respuesta" caption="Respuesta"}{space10}
     {foreach $comments[$post@index] as $comment}
         {$comment->content}</br></br>
     {/foreach}
