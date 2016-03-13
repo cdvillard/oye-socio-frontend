@@ -195,7 +195,7 @@ class OyeSocio extends Service
 		//foreach loop
 		$postCommentArray = [];
 		$commentList = [];
-		$commentAuthors = array();
+		$postComments = array();
 
 		foreach ($posts as $post) {
 			$postComments = file_get_contents("http://45.79.199.31:2016/OyeSocio/api/comments/post/{$post->id}");
@@ -216,9 +216,14 @@ class OyeSocio extends Service
 			foreach($commentArray as $comment) {
 				$commentAuthorData = json_decode(file_get_contents("http://45.79.199.31:2016/OyeSocio/api/users/{$comment->userId}"));
 				$comment->author = $commentAuthorData->firstName." ".$commentAuthorData->lastName;
+				// print_r($comment);
 			}
 			//Result in this scope available as $commentArray
+
 			//print_r($commentArray); $commentList->
+
+			array_push($postComments, $commentArray);
+
 		}
 		//Result in this scope available as $commentList
 
@@ -228,7 +233,7 @@ class OyeSocio extends Service
 			"lastName" => $lastName,
 			"posts" => $orderedArray,
 			"postCommentMap" => $postCommentArray,
-			"comments" => $commentArray
+			"comments" => $postComments
 		);
 
 	//	create the response
@@ -274,6 +279,25 @@ class OyeSocio extends Service
 		// }
 		// print_r($postAuthors);
 		// exit;
+
+		// BELOW is the algorithm for adding comments to the post
+						// //foreach loop
+						// $postCommentArray = [];
+						// $commentList = [];
+						// $commentAuthors = array();
+						//
+						// foreach ($posts as $post) {
+						// 	$postComments = file_get_contents("http://45.79.199.31:2016/OyeSocio/api/comments/post/{$post->id}");
+						// 	// $posts = file_get_contents("http://45.79.199.31:2016/OyeSocio/api/comments/post/1/");
+						// 	$postComments = json_decode($postComments);
+						// 	//foreach comment in $postComments
+						// 	// $postCommentArray[$post->id] = array($post, $postComments);
+						// 	// append comment to commentArray
+						// 	array_unshift($commentList, $postComments);
+						// 	// print_r($postCommentArray[$post->id]);
+						// }
+						// // echo ($commentList);
+						// // exit;
 
 		usort($newsFeed, function($a, $b) {
 			return $b->id - $a->id;
