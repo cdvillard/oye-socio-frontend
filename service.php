@@ -213,9 +213,9 @@ class OyeSocio extends Service
 	public function _newsfeed(Request $request)
 	{
 		//USE THE FOLLOWING $email VARIABLE FOR LIVE PRODUCTION - Charles
-		//$email = $request->email;
+		$email = $request->email;
 		//THIS $email VARIABLE IS EXACTLTY WHAT IT STATES: FOR TESTING - Charles
-		$email = "test@test.com";
+		//$email = "test@test.com";
 
 		$user = json_decode(file_get_contents("http://45.79.199.31:2016/OyeSocio/api/users/".$email."/"));
 

@@ -41,7 +41,7 @@
 
 {button href="oyesocio escribir TU MENSAJE" body="Por favor remplace TU MENSAJE con lo qué tienes en su mente!" caption="Escribir un mensaje"}{space10}
 
-<div style="background:#f3f8fa; padding:1em; padding-bottom:0.5em; border-radius: 0.6em; border-left:thick solid #4ea0cb; font-family:Arial; font-size:0.9em;">
+  <div style="background:#f3f8fa; padding:1em; padding-bottom:0.5em; border-radius: 0.6em; border-left:thick solid #4ea0cb; font-family:Arial; font-size:0.9em;">
     <p style="float:right; font-size:1.5em">Jose Marti</p>
     <div style="width:5em; height:5em; background:gray; margin-bottom:1em;"></div>
     {foreach $posts as $post}
