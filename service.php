@@ -126,23 +126,23 @@ class OyeSocio extends Service
 	{
 		$friends = file_get_contents("http://45.79.199.31:2016/OyeSocio/api/friends/user/1/");
 		$friends = json_decode($friends);
-		$liveFeed = array();
+		$newsFeed = array();
 		foreach ($friends as $friend) {
 			$posts = file_get_contents("http://45.79.199.31:2016/OyeSocio/api/posts/user/".$friend->friendId."/");
-			array_push($liveFeed, $posts);
+			array_push($newsFeed, json_decode($posts)[0]);
 		}
-		usort($liveFeed, function($a, $b) {
-			if ($a == $b) {
-				return 0;
-			}
-			return ($a < $b) ? 1 : -1;
+		// print_r($newsFeed);
+		// exit;
+		usort($newsFeed, function($a, $b) {
+			return $b->id - $a->id;
 		});
-
-
+		// print_r($newsFeed);
+		// exit;
+		$assocArray["newsFeed"] = $newsFeed;
 		//	create the response
 			$response = new Response();
-			$response->setResponseSubject("Perfil!");
-			$response->createFromTemplate("profile.tpl", $profileInfo);
+			$response->setResponseSubject("Newsfeed");
+			$response->createFromTemplate("newsfeed.tpl", $assocArray);
 			return $response;
 	}
 }
