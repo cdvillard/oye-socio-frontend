@@ -166,7 +166,9 @@ class OyeSocio extends Service
 	public function _perfil(Request $request)
 	{
 		$email = $request->email;
+
 		// $email = "test@test.com";
+
 
 		$user = file_get_contents("http://45.79.199.31:2016/OyeSocio/api/users/{$email}/");
 		// $user = file_get_contents("http://45.79.199.31:2016/OyeSocio/api/users/1/");
@@ -220,11 +222,11 @@ class OyeSocio extends Service
 			}
 			//Result in this scope available as $commentArray
 
-			//print_r($commentArray); $commentList->
-
-			array_push($postComments, $commentArray);
+			//array_push($postComments, $commentArray);
 
 		}
+		// print_r($postComments);
+		// exit;
 		//Result in this scope available as $commentList
 
 
@@ -233,7 +235,7 @@ class OyeSocio extends Service
 			"lastName" => $lastName,
 			"posts" => $orderedArray,
 			"postCommentMap" => $postCommentArray,
-			"comments" => $postComments
+			"comments" => $commentList['commentArray']
 		);
 
 	//	create the response
@@ -291,7 +293,7 @@ class OyeSocio extends Service
 						// 	// $posts = file_get_contents("http://45.79.199.31:2016/OyeSocio/api/comments/post/1/");
 						// 	$postComments = json_decode($postComments);
 						// 	//foreach comment in $postComments
-						// 	// $postCommentArray[$post->id] = array($post, $postComments);
+						// 	$postCommentArray[$post->id] = array($post, $postComments);
 						// 	// append comment to commentArray
 						// 	array_unshift($commentList, $postComments);
 						// 	// print_r($postCommentArray[$post->id]);

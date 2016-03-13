@@ -54,9 +54,9 @@
 
        <p style="float:right; font-size:1.2em">Carla Pichilon</p>
        <div style="width:3em; height:3em; background:gray; margin-bottom:1em;"></div>
-        {* {$comment->content} *}
-        {print_r($comment)}
-        
+         {$comment->content}
+
+
 
  <hr style="margin-top:1em; border: solid 1px; border-color:#c9c9c9; color:#c9c9c9: background-color:#c9c9c9">
        <div style="padding-bottom:0.5em; text-align:right">
